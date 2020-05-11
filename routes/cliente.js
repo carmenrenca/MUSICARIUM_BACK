@@ -22,6 +22,7 @@ router.post('/signup', userCtrl.signUp)
 router.post('/signin', userCtrl.signIn)
 router.put('/clienteupdate/:id', userCtrl.update)
 router.post('/getClientes', userCtrl.getsesiones)
+
 router.get('/private', auth, (req, res) => {
     res.status(200).send({ message: 'Tienes acceso' })
   })

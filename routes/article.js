@@ -1,14 +1,12 @@
 'use strict'
 var express= require('express');
-var ArticleController= require('../controller/article');
 var ArticleMongo = require('../controller/articulos')
 var PedidoController= require('../controller/pedidos');
-var EmailCtrl = require('../controller/email');
 var router= express.Router();
 var multipart = require('connect-multiparty');
 var md_upload= multipart({uploadDir:'./upload/articles'});
 //router.post('/save', ArticleController.save);
-router.get('/articles/:categori?',ArticleMongo.getArticles);
+router.get('/articles',ArticleMongo.getArticles);
 router.get('/article/:id',ArticleMongo.getArticle);
 router.get('/articleCategori',ArticleMongo.getCategoria);
 router.delete('/deletecategori/:id',ArticleMongo.deleteCategori);
@@ -24,6 +22,10 @@ router.get('/get-article' ,ArticleMongo.getArticles);
 router.post('/upload-image/:id', md_upload, ArticleMongo.upload);
 router.get('/get-image/:image', ArticleMongo.getImage);
 router.post('/email/:correo', ArticleMongo.sendEmail);
-
+router.post('/addfav/:email', ArticleMongo.addfavorito );
+router.get('/getfav/:email', ArticleMongo.getfavoritos);
+router.put('/deletefav/:id', ArticleMongo.deletefavorito);
+router.post('/cerrarsession', ArticleMongo.cerrarsession);
+router.post('/articlefav/:id',ArticleMongo.getfavorito);
 //router.get('/search/:search',ArticleController.search);
 module.exports=router;

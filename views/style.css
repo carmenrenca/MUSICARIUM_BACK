@@ -1,0 +1,29 @@
+
+
+#cabeceraemail{
+    background-color: teal;
+    padding: 26px;
+    text-align: center;
+}
+
+#cabeceraemail h2{
+    color: white;
+    font-size: 35px;
+    margin-right: 304px;
+}
+
+#logo {
+    width: 30%;
+    font-size: 30px;
+    float: left;
+    margin-top: 35px;
+}
+
+#logo img {
+    display: block;
+    float: left;
+    height: 125px;
+    margin-top: -48px;
+    margin-right: 10px;
+    animation: latir infinite 5s linear;
+}

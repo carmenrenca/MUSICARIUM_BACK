@@ -16,6 +16,7 @@ var ArticleSchema = Schema({
     img__c:String,
     imagen: String,
     categoria:String,
+    like:Boolean,
     date : {type:Date, default: Date.now},
 });
  

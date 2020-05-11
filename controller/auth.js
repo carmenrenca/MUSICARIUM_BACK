@@ -2,6 +2,7 @@
 
 const User = require('../models/user')
 const service = require('../services/index')
+var Article = require('../models/article');
 var f = true;
 var controlemai = true;
 
@@ -143,6 +144,8 @@ console.log(params.nombre)
 
 }
 function signIn(req, res) {
+
+   console.log("ENTRA EN LOGIN")
     console.log(req.body.email)
 
     console.log(req.body.password)
