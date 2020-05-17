@@ -14,6 +14,8 @@ var multipart = require('connect-multiparty');
 
 router.get('/cliente/datos-curso',auth, ClienteController.datosCurso);
 router.post('/cliente/save', ClienteController.save);
+router.put('/updateEmail/:email', ClienteController.updateEmail);
+router.put('/updatePassword/:email', ClienteController.updatePassword);
 router.get('/clientes/:last?',  ClienteController.getClientes);
 router.delete('/clientes-delete/:id', ClienteController.delete);
 router.get('/cliente-search/:search', ClienteController.search);

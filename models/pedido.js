@@ -10,9 +10,12 @@ var PedidoSchema = Schema({
     Status__c: String,
     Ciudad__c: String,
     cliente__c:String,
+    email:String,
     Direccion__c:String,
     Provincia__c:String,
     total__c:String,
+    articulos:[],
+    Infocliente:[],
     date : {type:Date, default: Date.now},
 });
  

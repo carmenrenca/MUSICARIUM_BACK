@@ -14,7 +14,9 @@ console.log(user)
     role:user[0].rol,
     nombre:user[0].nombre,
     apellido:user[0].apellido,
-    email:user[0].email
+    email:user[0].email,
+    telefono:user[0].telefono
+
   }
 console.log(payload);
   return jwt.encode(payload, config.SECRET_TOKEN)

@@ -246,7 +246,151 @@ console.log(clienteId+"IDD")
 
     },
 
+    updateEmail: (req, res) => {
+      
+                var email= req.params.email;
+        
+                var params = req.body;
 
+                console.log(params.email);
+                try {
+                    var validate_email = !validator.isEmpty(params.email);
+                    var validate_password = !validator.isEmpty(params.password);
+              
+        
+                } catch (err) {
+                    console.log(err);
+                    return res.status(200).send({
+                        status: 'error',
+                        message: 'Faltan datos por enviar!!'
+                    });
+        
+                }
+                var query = User.find({ password: req.body.password });
+
+           
+                console.log("password"+req.body.password)
+                query.sort('-password').exec((err, pass) => {
+           console.log(pass);
+                    if (pass.length==0) { 
+                       
+                        return res.status(500).send({
+                            status: 'error',
+                            message: 'La contraseña no existe'
+                        });
+                     
+                    }else{
+                        if (validate_email  ) {
+                            //Find and Update
+                           console.log("3333"+ email)
+                            User.findOneAndUpdate({ email: email }, {$set: {email: req.body.email}}, { new: true }, (err, articleUpdate) => {
+                                if (err) {
+                                    return res.status(500).send({
+                                        status: 'error',
+                                        message: 'Error al actualizar'
+                                    });
+                                }
+                console.log(articleUpdate)
+                
+                                if (!articleUpdate) {
+                                    return res.status(404).send({
+                                        status: 'error',
+                                        message: 'error al actualizar la direccion'
+                                    });
+                                }
+                                return res.status(200).send({
+                                    status: 'success',
+                                    article: articleUpdate
+                                });
+                
+                            })
+                        } else {
+                            return res.status(200).send({
+                                status: 'error',
+                                message: 'La validación no es correcta'
+                            });
+                        }
+                    } 
+
+                });
+         
+
+              
+        
+        
+            },
+
+            updatePassword: (req, res) => {
+             
+                        var email= req.params.email;
+                
+                        //Regoger los datos que llegan por put 
+                        var params = req.body;
+                
+                        try {
+                          
+                            var validate_password = !validator.isEmpty(params.password);
+                            var validate_passwordNew = !validator.isEmpty(params.passwordNew);
+                
+                        } catch (err) {
+                            console.log(err);
+                            return res.status(200).send({
+                                status: 'error',
+                                message: 'Faltan datos por enviar!!'
+                            });
+                
+                        }
+                        var querypass = User.find({ password: req.body.password });
+        
+                        querypass.exec((err, pass) => {
+                            if (pass.length == 0) {
+                                return res.status(404).send({
+                                    status: 'error',
+                                    message: 'No existe la contraseña!!',
+                    
+                                })
+                                
+                            } else{
+                                if (validate_passwordNew ) {
+                                    //Find and Update
+                                   
+                                    User.findOneAndUpdate({ email: email }, {$set: {password: req.body.passwordNew}}, { new: true }, (err, articleUpdate) => {
+                                        if (err) {
+                                            return res.status(500).send({
+                                                status: 'error',
+                                                message: 'Error al actualizar'
+                                            });
+                                        }
+                        console.log(articleUpdate)
+                        
+                                        if (!articleUpdate) {
+                                            return res.status(404).send({
+                                                status: 'error',
+                                                message: 'error al actualizar la contraseña'
+                                            });
+                                        }
+                                        return res.status(200).send({
+                                            status: 'success',
+                                            article: articleUpdate,
+                                            message:'Contraseña actualizada!!'
+                                        });
+                        
+                                    });
+                                } else {
+                                    return res.status(200).send({
+                                        status: 'error',
+                                        message: 'La validación no es correcta'
+                                    });
+                                }
+                            }
+                    
+                    
+                        })
+
+                      
+                
+                
+                    },
 
 }//end controller
 

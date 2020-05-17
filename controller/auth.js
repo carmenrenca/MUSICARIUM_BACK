@@ -9,6 +9,9 @@ var controlemai = true;
 function signUp(req, res) {
 
     var params = req.body;
+    if(params.nombre=="" || params.apellido ==""|| params.email ==""|| params.password==""){
+        return res.status(500).send({ message: `Error al crear el usuario` })
+    }
     const user = new User({
         nombre: params.nombre,
         apellido: params.apellido,
@@ -19,7 +22,7 @@ function signUp(req, res) {
         password: params.password,
         rol:params.rol
     })
-    
+    console.log(user);
     var query = User.find({ email: req.body.email });
 
     //Find sacar los datos de la bd
@@ -192,7 +195,7 @@ function signIn(req, res) {
 
 
                 req.user = user
-
+console.log(user);
                 return res.status(200).send({
 
                     message: 'Te has logueado correctamente',

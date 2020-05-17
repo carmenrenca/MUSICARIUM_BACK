@@ -10,6 +10,8 @@ var Schema = mongoose.Schema;
 var ArticleSchema = Schema({
     Name: String,
     Precio__c: Number,
+    Descuento:Number,
+    PrecioFinal:Number,
     Descripcion__c:String,
     Cantidad__c:Number,
     stock__c:Number,

@@ -84,13 +84,23 @@ var controller = {
             article.Name = params.Name;
             article.Precio__c = params.Precio__c;
             article.Descripcion__c = params.Descripcion__c;
-        
+            article.Descuento=params.Descuento;
+            article.PrecioFinal=0;
             article.imagen = null;
             article.categoria=params.categoria;
             article.stock__c=params.stock__c;
-            //asignar valores
-
-            //guardar el articulo
+            //CALCULAR EL DESCUENTO DE LOS ARTICULOS
+if(article.Descuento){
+    article.Descuento=article.Descuento/100;
+    var aux=0;
+  aux= ( article.Descuento*params.Precio__c);
+  article.PrecioFinal=params.Precio__c- aux;
+  console.log(article.PrecioFinal)  
+  article.PrecioFinal=Math.round(article.PrecioFinal)-0.01;
+}else{
+    article.PrecioFinal=article.Precio__c;
+}
+    console.log(article.PrecioFinal)        //guardar el articulo
             article.save((err, articleStore) => {
 
 
