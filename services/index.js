@@ -12,6 +12,7 @@ console.log(user)
     iat: moment().unix(),
     exp: moment().add(14, 'days').unix(),
     role:user[0].rol,
+    direccion: user[0].direccion,
     nombre:user[0].nombre,
     apellido:user[0].apellido,
     email:user[0].email,
@@ -30,6 +31,7 @@ function createTokenRegistre (user) {
       iat: moment().unix(),
       exp: moment().add(14, 'days').unix(),
       role:user.rol,
+      direccion:user.direccion,
       nombre:user.nombre,
       apellido:user.apellido,
       email:user.email
