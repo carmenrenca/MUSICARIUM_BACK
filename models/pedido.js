@@ -14,6 +14,7 @@ var PedidoSchema = Schema({
     Direccion__c:String,
     Provincia__c:String,
     total__c:String,
+    pdf: String,
     articulos:[],
     Infocliente:[],
     date : {type:Date, default: Date.now},

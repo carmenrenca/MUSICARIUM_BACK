@@ -1,17 +1,28 @@
 'use strict'
 var mongoose = require('mongoose');
+//var config= require ('./config');
  var app = require('./app');
  var port = 3900;
 mongoose.set('useFindAndModify', false);
 mongoose.Promise= global.Promise;
+////mongoose.connect('mongodb://localhost:27017/Musicarium',{useNewUrlParser: true} ).then(()=>{
 
-mongoose.connect('mongodb://localhost:27017/Musicarium',{useNewUrlParser: true} ).then(()=>{
+mongoose.connect('mongodb+srv://user:renca123456@cluster0-vvcre.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true} ).then(()=>{
 
 console.log('conexion a la base de datos se ha realizado con exito!!!');
 //crear servidor y ponerme a escuchar peticiones http
 app.listen(port, ()=>{
-    console.log('Sevidor corriendo en http://localhost:'+port);
+    console.log('Sevidor corriendo en producción');
 })
+}).catch(error=>{
+  mongoose.connect('mongodb://localhost:27017/Musicarium',{useNewUrlParser: true} ).then(()=>{
+
+    console.log('conexion a la base de datos se ha realizado con exito!!!');
+    //crear servidor y ponerme a escuchar peticiones http
+    app.listen(port, ()=>{
+        console.log('Sevidor corriendo en http://localhost:'+port);
+    })
+    })
 });
 /**
  * require('dotenv').config();

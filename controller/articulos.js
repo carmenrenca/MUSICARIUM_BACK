@@ -740,7 +740,47 @@ console.log(req.params.correo);
           }
     });
     },
+    search: (req, res) => {
 
+        //SACAR EL STRING A BUSCAR
+
+        var searchstring = req.params.search;
+console.log(searchstring+"string search")
+
+        //FIND OR
+        Article.find({
+            "$or": [
+                { "Name": { "$regex": searchstring, "$options": "i" } },
+                { "Descripcion__c": { "$regex": searchstring, "$options": "i" } },
+
+            ]
+        }).sort([['date', 'descending']]).exec((err, articles) => {
+
+
+            if (err) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: "Error en la petición!!!"
+
+                });
+            }
+            if (!articles || articles.length <= 0) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: "No hay articulos para mostrar con tu busquedad!!"
+
+                });
+            }
+            return res.status(200).send({
+                status: 'success',
+                articles
+
+            });
+        })
+
+
+
+    },
     addfavorito:(req,res)=>{
         var params = req.body;
 
